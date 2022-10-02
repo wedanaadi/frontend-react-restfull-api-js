@@ -1,1 +1,1 @@
-# FRONTEND FOR RESTFULL-API-JS repository
+# Frontend for RESTFULL-API-JS repository
