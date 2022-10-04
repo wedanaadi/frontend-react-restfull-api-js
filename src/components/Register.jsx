@@ -21,7 +21,7 @@ const Register = () => {
           fullname,
         }
       );
-      navigate("/")
+      navigate("/");
     } catch (error) {
       if (error.response) {
         setErrors(error.response.data.errors);
@@ -47,13 +47,12 @@ const Register = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
-                  {errors.map((error, index) =>
-                    error.param == "username" ? (
-                      <Form.Text key={index} className="text-danger">
-                        {error.msg}
-                      </Form.Text>
-                    ) : null
-                  )}
+
+                  {errors.username?.map((msg, index) => (
+                    <div key={index}>
+                      <Form.Text className="text-danger">{msg}</Form.Text>
+                    </div>
+                  ))}
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -64,13 +63,11 @@ const Register = () => {
                     value={fullname}
                     onChange={(e) => setFullName(e.target.value)}
                   />
-                  {errors.map((error, index) =>
-                    error.param == "fullname" ? (
-                      <Form.Text key={index} className="text-danger">
-                        {error.msg}
-                      </Form.Text>
-                    ) : null
-                  )}
+                  {errors.fullname?.map((msg, index) => (
+                    <div key={index}>
+                      <Form.Text className="text-danger">{msg}</Form.Text>
+                    </div>
+                  ))}
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -81,13 +78,11 @@ const Register = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  {errors.map((error, index) =>
-                    error.param == "password" ? (
-                      <Form.Text key={index} className="text-danger">
-                        {error.msg}
-                      </Form.Text>
-                    ) : null
-                  )}
+                  {errors.password?.map((msg, index) => (
+                    <div key={index}>
+                      <Form.Text className="text-danger">{msg}</Form.Text>
+                    </div>
+                  ))}
                 </Form.Group>
                 <Button variant="primary" type="submit">
                   Save

@@ -25,7 +25,7 @@ const Login = () => {
         username,
         password,
       });
-      localStorage.setItem('rt',btoa(response.data.refreshToken))
+      localStorage.setItem('rt',btoa(response.data.data.refreshToken))
       navigate("/dashboard");
     } catch (e) {
       setErrorsValidation([]);
@@ -33,7 +33,7 @@ const Login = () => {
       if (e.response.status == 400) {
         setErrorsValidation(e.response.data.errors);
       } else {
-        setError(e.response.data);
+        setError(e.response.data.errors);
       }
     }
   };
@@ -61,13 +61,11 @@ const Login = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
-                  {errorsValidation.map((error, index) =>
-                    error.param == "username" ? (
-                      <Form.Text key={index} className="text-danger">
-                        {error.msg}
-                      </Form.Text>
-                    ) : null
-                  )}
+                  {errorsValidation.username?.map((msg, index) => (
+                    <div key={index}>
+                      <Form.Text className="text-danger">{msg}</Form.Text>
+                    </div>
+                  ))}
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -78,13 +76,11 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  {errorsValidation.map((error, index) =>
-                    error.param == "password" ? (
-                      <Form.Text key={index} className="text-danger">
-                        {error.msg}
-                      </Form.Text>
-                    ) : null
-                  )}
+                  {errorsValidation.password?.map((msg, index) => (
+                    <div key={index}>
+                      <Form.Text className="text-danger">{msg}</Form.Text>
+                    </div>
+                  ))}
                 </Form.Group>
                 <Button variant="primary" type="submit">
                   Submit

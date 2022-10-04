@@ -26,8 +26,8 @@ function Dashboard() {
           },
         }
       );
-      setToken(response.data.token);
-      const decode = jwt_decode(response.data.token);
+      setToken(response.data.data.token);
+      const decode = jwt_decode(response.data.data.token);
       setName(decode.fullname);
       setExpiredToken(decode.exp);
     } catch (error) {
@@ -51,9 +51,9 @@ function Dashboard() {
             },
           }
         );
-        config.headers.Authorization = `Bearer ${response.data.token}`;
+        config.headers.Authorization = `Bearer ${response.data.data.token}`;
         setToken(response.data.token);
-        const decode = jwt_decode(response.data.token);
+        const decode = jwt_decode(response.data.data.token);
         setName(decode.fullname);
         setExpiredToken(decode.exp);
       }
