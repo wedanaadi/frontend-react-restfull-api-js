@@ -24,8 +24,13 @@ const Login = () => {
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/login`, {
         username,
         password,
+      },{
+        headers: {
+          withCredentials:true,
+          credentials: 'include'
+        }
       });
-      localStorage.setItem('rt',btoa(response.data.data.refreshToken))
+      // localStorage.setItem('rt',btoa(response.data.data.refreshToken))
       navigate("/dashboard");
     } catch (e) {
       setErrorsValidation([]);

@@ -7,15 +7,11 @@ const Menu = () => {
   const navigate = useNavigate()
   const logout = async() => {
     try {
-      await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/logout`,null,{
-        headers: {
-          refreshtoken: localStorage.getItem("rt"),
-        },
-      })
-      localStorage.removeItem("rt")
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/logout`)
+      // localStorage.removeItem("rt")
       navigate('/')
     } catch (error) {
-      console.log("logout");
+      console.log(error);
     }
   };
 

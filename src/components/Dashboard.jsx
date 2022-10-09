@@ -19,12 +19,7 @@ function Dashboard() {
   const refreshToken = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/auth/token`,
-        {
-          headers: {
-            refreshtoken: localStorage.getItem("rt"),
-          },
-        }
+        `${import.meta.env.VITE_BASE_URL}/api/v1/auth/token`
       );
       setToken(response.data.data.token);
       const decode = jwt_decode(response.data.data.token);
@@ -44,16 +39,12 @@ function Dashboard() {
       const currentDate = new Date();
       if (expiredToken * 1000 < currentDate.getTime()) {
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/v1/auth/token`,
-          {
-            headers: {
-              refreshtoken: localStorage.getItem("rt"),
-            },
-          }
+          `${import.meta.env.VITE_BASE_URL}/api/v1/auth/token`
         );
-        config.headers.Authorization = `Bearer ${response.data.data.token}`;
-        setToken(response.data.token);
-        const decode = jwt_decode(response.data.data.token);
+        const { data } = response.data
+        config.headers.Authorization = `Bearer ${data.token}`;
+        setToken(data.token);
+        const decode = jwt_decode(data.token);
         setName(decode.fullname);
         setExpiredToken(decode.exp);
       }
